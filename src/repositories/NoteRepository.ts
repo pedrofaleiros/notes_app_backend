@@ -46,6 +46,13 @@ class NoteRepository {
 			where: {
 				user_id: user_id
 			},
+			include: {
+				dones: {
+					include: {
+						action: true
+					}
+				}
+			},
 			orderBy: {
 				date: "asc"
 			}
@@ -86,6 +93,13 @@ class NoteRepository {
 				date: {
 					gte: startDate,
 					lte: endDate,
+				}
+			},
+			include: {
+				dones: {
+					include: {
+						action: true
+					}
 				}
 			}
 		})
