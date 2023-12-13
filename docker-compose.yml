@@ -1,4 +1,4 @@
-#`npm prisma migrate dev` ao subir container pela primeira vez
+#`npx prisma migrate dev --name create` ao subir container pela primeira vez
 version: '3'
 
 services:

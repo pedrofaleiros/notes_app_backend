@@ -12,7 +12,6 @@ const noteController: NoteController = new NoteController(new NoteService())
 
 const router = Router()
 
-//user DONE
 router.post('/user', userController.createUser)
 router.get('/user', isAuthenticated, userController.listAllUsers)
 router.post('/session', userController.authUser)
