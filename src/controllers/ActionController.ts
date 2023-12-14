@@ -26,10 +26,11 @@ class ActionController {
 	}
 
 	async getActions(req: Request, res: Response) {
-		const response = await this.service.getActions()
-		return res.json({ 
+		const search = req.query.name
+		const response = await this.service.getActions(search)
+		return res.json({
 			length: response.length,
-			actions: response 
+			actions: response
 		})
 	}
 

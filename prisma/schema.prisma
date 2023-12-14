@@ -53,6 +53,7 @@ model Done {
 model Action {
   id   String @id @default(uuid())
   name String
+  searchName String?
 
   dones Done[]
 

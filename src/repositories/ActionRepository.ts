@@ -1,5 +1,6 @@
 import { ActionEntity } from "../models/ActionEntity";
 import prismaClient from "../prisma/PrismaClient";
+import { normalizeText } from "../utils/normalizeText";
 
 class ActionRepository {
 	async createAction(action: ActionEntity) {
@@ -23,12 +24,36 @@ class ActionRepository {
 			select: {
 				id: true,
 				name: true,
+			},
+			orderBy: {
+				name: 'asc'
 			}
 		})
 		return data
 	}
 
-	async getActionById(action_id: string){
+	async searchActions(name: string) {
+
+		const search = normalizeText(name)
+
+		const data = await prismaClient.action.findMany({
+			where: {
+				searchName: {
+					contains: search
+				}
+			},
+			select: {
+				id: true,
+				name: true,
+			},
+			orderBy: {
+				name: 'asc'
+			}
+		})
+		return data
+	}
+
+	async getActionById(action_id: string) {
 		const action = await prismaClient.action.findUnique({
 			where: {
 				id: action_id

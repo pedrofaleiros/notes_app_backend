@@ -26,7 +26,10 @@ class ActionService {
 		}
 	}
 
-	async getActions() {
+	async getActions(name: any) {
+		if (name) {
+			return await this.repository.searchActions(name)
+		}
 		return await this.repository.getActions()
 	}
 }

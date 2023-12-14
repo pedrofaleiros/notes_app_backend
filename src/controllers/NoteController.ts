@@ -35,7 +35,10 @@ class NoteController {
 	async getUserNotes(req: Request, res: Response) {
 		const user_id = req.user_id as string;
 		const notes = await this.service.getUserNotes(user_id)
-		return res.json(notes)
+		return res.json({
+			length: notes.length,
+			notes: notes
+		})
 	}
 
 	async getNoteByDate(req: Request, res: Response) {

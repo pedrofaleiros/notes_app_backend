@@ -16,8 +16,8 @@ const doneController: DoneController = new DoneController(new DoneService())
 const router = Router()
 
 router.post('/user', userController.createUser)
-router.get('/user', isAuthenticated, userController.listAllUsers)
 router.post('/session', userController.authUser)
+// router.get('/user', isAuthenticated, userController.listAllUsers)
 
 router.get('/action', isAuthenticated, actionController.getActions)
 router.post('/action', isAuthenticated, actionController.createAction)

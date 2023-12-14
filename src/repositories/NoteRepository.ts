@@ -46,17 +46,32 @@ class NoteRepository {
 			where: {
 				user_id: user_id
 			},
-			include: {
+			take: 10,
+			select: {
+				id: true,
+				date: true,
+				content: true,
+				body: true,
+				mind: true,
 				dones: {
-					include: {
-						action: true
+					select: {
+						id: true,
+						minutes: true,
+						action: {
+							select: {
+								id: true,
+								name: true,
+							}
+						}
 					}
 				}
 			},
 			orderBy: {
-				date: "asc"
+				date: "desc"
 			}
-		})
+		},
+
+		)
 
 		return notes
 	}
@@ -93,12 +108,25 @@ class NoteRepository {
 				date: {
 					gte: startDate,
 					lte: endDate,
-				}
+				},
+
 			},
-			include: {
+			select: {
+				id: true,
+				date: true,
+				content: true,
+				body: true,
+				mind: true,
 				dones: {
-					include: {
-						action: true
+					select: {
+						id: true,
+						minutes: true,
+						action: {
+							select: {
+								id: true,
+								name: true,
+							}
+						}
 					}
 				}
 			}
