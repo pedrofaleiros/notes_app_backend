@@ -59,6 +59,22 @@ class DoneRepository {
 			}
 		})
 	}
+
+	async findNoteByDone(doneId: string) {
+		const done = await prismaClient.done.findUnique({
+			where: { id: doneId },
+			include: {
+				note: {
+					select: {
+						id: true,
+						date: true,
+					}
+				}
+			}
+		})
+
+		return done?.note
+	}
 }
 
 export { DoneRepository }

@@ -43,7 +43,11 @@ class NoteController {
 
 	async getNoteByDate(req: Request, res: Response) {
 		const user_id = req.user_id as string;
-		const date = formatDate(req.query.date as string);
+
+		let date = new Date()
+		if (req.query.date) {
+			date = formatDate(req.query.date as string);
+		}
 
 		const notes = await this.service.getNoteByDate(user_id, date)
 		return res.json(notes)
